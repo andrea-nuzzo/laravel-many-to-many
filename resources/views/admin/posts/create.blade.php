@@ -37,6 +37,19 @@
                                  <div class="alert alert-danger my-2"> {{$message}}</div>
                                 @enderror
                             </div>
+                            <p>Tag</p>
+                            <div class="form-group form-check d-flex">
+                                @foreach ($tags as $tag)
+                                    <div class="btn-group-toggle mx-2" data-toggle="buttons">
+                                        <label class="btn btn-secondary active" for="{{$tag->slug}}">
+                                        <input type="checkbox" checked autocomplete="off" id="{{$tag->slug}}" name="tag[]" value="{{$tag->id}}"> {{$tag->name}}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+
+
+
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" name="published" id="published" {{old('published') ? 'checked': ''}} >
                                 <label class="form-check-label" for="published">Published</label>
