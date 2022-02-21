@@ -15,7 +15,7 @@ class PostController extends Controller
         "content"=>"required",
         "puplished"=>"sometimes|accepted",
         "category_id"=>"nullable|exists:categories,id",
-        "tags"=>"nullable|exists:tags,id",
+        "tags"=>"nullable",
     ];
 
     /**
@@ -38,6 +38,7 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
+
         $categories = Category::all();
 
         return view("admin.posts.create", compact("categories", "tags"));
@@ -51,10 +52,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {   
-        $data = $request->all();
-        $request->validate($this->validation);
+        // dd($request->all());
 
-        // $newPost = Post::create($data);
+        $data = $request->all();
+
+        $request->validate($this->validation);
 
         $newPost = new Post();
         $newPost->title = $data["title"];
@@ -73,6 +75,12 @@ class PostController extends Controller
         $newPost->slug = $slug;
 
         $newPost->save();
+
+        // dd($data["tags"]);
+        
+        if(isset($data["tags"])){
+            $newPost->tags()->sync($data["tags"]);
+        }
         
         return redirect()->route('posts.show', $newPost->id);
     }

@@ -11,7 +11,7 @@
                     <div class="card-body"> 
                         <form action="{{route("posts.store")}}" method="POST">
                             @csrf
-                            
+
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" id="title" placeholder="Add title" value="{{old('title')}}">
@@ -46,7 +46,7 @@
                                 @foreach ($tags as $tag)
                                     <div class="btn-group-toggle mx-2" data-toggle="buttons">
                                         <label class="btn btn-secondary active" for="{{$tag->slug}}">
-                                        <input type="checkbox" id="{{$tag->slug}}" name="tag[]" value="{{$tag->id}}"> {{$tag->name}}
+                                        <input type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}"> {{$tag->name}}
                                         </label>
                                     </div>
                                 @endforeach

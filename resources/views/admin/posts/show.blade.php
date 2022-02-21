@@ -24,6 +24,18 @@
                                 @endif                               
                             </div>
                         </div>
+                          {{-- Tags --}}
+                          <h5 class="mt-3">Tags</h5>
+                          <div class="card-body  raudend border bgColor">
+                              <div class="">
+                                  @if (count($post->tags) > 0)
+                                      <span class="showCategory p-2 rounded">{{$post->tags->name}}</span>
+                                  @else
+                                      Nessun Tags
+                                  @endif                               
+                              </div>
+                          </div>
+                        
                         
                         <div class="mx-2 my-3">
                             <div class="d-flex">
