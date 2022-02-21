@@ -44,13 +44,16 @@
                             <p>Tag</p>
                             <div class="form-group form-check d-flex">
                                 @foreach ($tags as $tag)
-                                    <div class="btn-group-toggle mx-2" data-toggle="buttons">
+                                    <div class="btn-group-toggle mx-2  " data-toggle="buttons">
                                         <label class="btn btn-secondary active" for="{{$tag->slug}}">
-                                        <input type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}"> {{$tag->name}}
+                                        <input type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{in_array($tag->id, old("tags", [])) ? 'checked' : ''}}> {{$tag->name}}
                                         </label>
                                     </div>
                                 @endforeach
                             </div>
+                                @error('tags')
+                                    <div class="alert alert-danger my-2"> {{$message}}</div>
+                                @enderror
 
                             <div class="form-group form-check">
                                 <input type="checkbox" class="form-check-input @error('published') is-invalid @enderror" name="published" id="published" {{old('published') ? 'checked': ''}} >

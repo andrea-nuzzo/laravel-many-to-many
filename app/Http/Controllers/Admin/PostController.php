@@ -15,7 +15,7 @@ class PostController extends Controller
         "content"=>"required",
         "puplished"=>"sometimes|accepted",
         "category_id"=>"nullable|exists:categories,id",
-        "tags"=>"nullable",
+        "tags"=>"nullable|exists:tags,id",
     ];
 
     /**
