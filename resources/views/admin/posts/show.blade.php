@@ -24,12 +24,14 @@
                                 @endif                               
                             </div>
                         </div>
-                          {{-- Tags --}}
+                        
                           <h5 class="mt-3">Tags</h5>
                           <div class="card-body  raudend border bgColor">
                               <div class="">
                                   @if (count($post->tags) > 0)
-                                      <span class="showCategory p-2 rounded">{{$post->tags->name}}</span>
+                                    @foreach ($post->tags as $tags)
+                                        <span class="showCategory p-2 rounded">{{$tags->name}}</span>
+                                    @endforeach
                                   @else
                                       Nessun Tags
                                   @endif                               
