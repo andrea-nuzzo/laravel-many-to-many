@@ -20,6 +20,7 @@
                                  <div class="alert alert-danger my-2"> {{$message}}</div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label for="content">Content</label>
                                 <textarea type="text" class="form-control @error('content') is-invalid @enderror" name="content" id="content" placeholder="Add text" rows="8">{{old('content') ? old('content') : $post->content}}</textarea>
@@ -27,6 +28,7 @@
                                  <div class="alert alert-danger my-2"> {{$message}}</div>
                                 @enderror
                             </div>
+
                             <div class="form-group">
                                 <label for="category">Categories</label>
                                 <select class="custom-select @error('category_id') is-invalid @enderror" name="category_id" id="category">
@@ -39,6 +41,29 @@
                                  <div class="alert alert-danger my-2"> {{$message}}</div>
                                 @enderror
                             </div>
+
+                            <p>Tag</p>
+                            <div class="form-group form-check d-flex">
+                                @foreach ($tags as $tag)
+                                    @if (old("tags"))
+                                        <div class="btn-group-toggle mx-2  " data-toggle="buttons">
+                                            <label class="btn btn-secondary active" for="{{$tag->slug}}">
+                                            <input type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{in_array($tag->id, old("tags", [])) ? 'checked' : ''}}> {{$tag->name}}
+                                            </label>
+                                        </div>
+                                    @else
+                                        <div class="btn-group-toggle mx-2  " data-toggle="buttons">
+                                            <label class="btn btn-secondary active" for="{{$tag->slug}}">
+                                            <input type="checkbox" id="{{$tag->slug}}" name="tags[]" value="{{$tag->id}}" {{$post->tags->contains($tag) ? 'checked' : ''}}> {{$tag->name}}
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                                @error('tags')
+                                    <div class="alert alert-danger my-2"> {{$message}}</div>
+                                @enderror
+
                             <div class="form-group form-check">
                                 @php
                                     $published = old('published') ? old('published') : $post->published;
