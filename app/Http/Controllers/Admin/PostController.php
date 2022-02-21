@@ -15,6 +15,7 @@ class PostController extends Controller
         "content"=>"required",
         "puplished"=>"sometimes|accepted",
         "category_id"=>"nullable|exists:categories,id",
+        "tags"=>"nullable|exists:tags,id",
     ];
 
     /**
@@ -49,7 +50,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         $data = $request->all();
         $request->validate($this->validation);
 
